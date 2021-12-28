@@ -1,6 +1,6 @@
 module Main where
 
-import Lib
+import BCG
 
 main :: IO ()
-main = someFunc
+main = putStr ""
