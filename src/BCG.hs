@@ -12,6 +12,7 @@ data BCG
     [BCE]      -- ^ List of 'BCE's
     Set.IntSet -- ^ Set of Vertices
     Int        -- ^ Number of different colours
+    deriving Show
 
 -- | Bi-Coloured Edge
 data BCE = BCE { fromV :: Int            -- ^ From Vertex
@@ -19,7 +20,7 @@ data BCE = BCE { fromV :: Int            -- ^ From Vertex
                , toV   :: Int            -- ^ To Vertex
                , toC   :: Int            -- ^ To Colour
                , w     :: Complex Double -- ^ Weight
-}
+} deriving Show
 
 -- * Functions
 

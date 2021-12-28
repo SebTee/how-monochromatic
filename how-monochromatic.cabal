@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       BCG
+      ParseBCG
   other-modules:
       Paths_how_monochromatic
   hs-source-dirs:
