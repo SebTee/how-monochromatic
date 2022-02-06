@@ -16,8 +16,6 @@ jobs:
     - uses: actions/setup-haskell@v1
       with:
         enable-stack: true
-        ghc-version: '8.10.3'
-        cabal-version: '3.2'
 
     - name: Install dependencies and build
       run: stack build
