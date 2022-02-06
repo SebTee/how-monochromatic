@@ -61,4 +61,5 @@ test-suite how-monochromatic-test
       base >=4.7 && <5
     , containers >0.6
     , how-monochromatic
+    , hspec >=2.0
   default-language: Haskell2010
