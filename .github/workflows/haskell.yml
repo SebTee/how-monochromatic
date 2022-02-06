@@ -25,7 +25,7 @@ jobs:
       run: stack test
     - name: Generate docs
       run: |
-        stack haddock \
+        stack haddock &&\
         cp -r $(stack path --local-doc-root) ./
     - name: Publish docs
       uses: JamesIves/github-pages-deploy-action@v4.2.3
