@@ -12,7 +12,7 @@
 </span><span id="line-12"></span><span>    </span><span class="hs-special">[</span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span class="hs-special">]</span><span>      </span><span class="hs-comment">-- ^ List of 'BCE's</span><span>
 </span><span id="line-13"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Set.IntSet</span></span><span> </span><span class="hs-comment">-- ^ Set of Vertices</span><span>
 </span><span id="line-14"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>        </span><span class="hs-comment">-- ^ Number of different colours</span><span>
-</span><span id="line-15"></span><span>    </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679033547"><span id="local-6989586621679033549"><span id="local-6989586621679033551"><span class="annot"><span class="annottext">Int -&gt; BCG -&gt; ShowS
+</span><span id="line-15"></span><span>    </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679033675"><span id="local-6989586621679033677"><span id="local-6989586621679033679"><span class="annot"><span class="annottext">Int -&gt; BCG -&gt; ShowS
 [BCG] -&gt; ShowS
 BCG -&gt; String
 (Int -&gt; BCG -&gt; ShowS)
@@ -38,7 +38,7 @@ $cshowsPrec :: Int -&gt; BCG -&gt; ShowS
 </span><a href="BCG.html#toC"><span class="hs-identifier hs-var hs-var">toC</span></a></span></span><span>   </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span>            </span><span class="hs-comment">-- ^ To Colour</span><span>
 </span><span id="line-22"></span><span>               </span><span class="hs-special">,</span><span> </span><span id="w"><span class="annot"><span class="annottext">BCE -&gt; Complex Double
 </span><a href="BCG.html#w"><span class="hs-identifier hs-var hs-var">w</span></a></span></span><span>     </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Complex</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">Double</span></span><span> </span><span class="hs-comment">-- ^ Weight</span><span>
-</span><span id="line-23"></span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679033534"><span id="local-6989586621679033536"><span id="local-6989586621679033538"><span class="annot"><span class="annottext">Int -&gt; BCE -&gt; ShowS
+</span><span id="line-23"></span><span class="hs-special">}</span><span> </span><span class="hs-keyword">deriving</span><span> </span><span id="local-6989586621679033662"><span id="local-6989586621679033664"><span id="local-6989586621679033666"><span class="annot"><span class="annottext">Int -&gt; BCE -&gt; ShowS
 [BCE] -&gt; ShowS
 BCE -&gt; String
 (Int -&gt; BCE -&gt; ShowS)
@@ -53,68 +53,171 @@ showsPrec :: Int -&gt; BCE -&gt; ShowS
 $cshowsPrec :: Int -&gt; BCE -&gt; ShowS
 </span><span class="hs-identifier hs-var hs-var hs-var hs-var hs-var hs-var hs-var hs-var">Show</span></span></span></span></span><span>
 </span><span id="line-24"></span><span>
-</span><span id="line-25"></span><span class="hs-comment">-- * Functions</span><span>
+</span><span id="line-25"></span><span class="hs-comment">-- * Constructors</span><span>
 </span><span id="line-26"></span><span>
-</span><span id="line-27"></span><span class="hs-comment">-- | Get a list of 'BCE's connected to a vertex</span><span>
-</span><span id="line-28"></span><span class="annot"><a href="BCG.html#getIncidentEdges"><span class="hs-identifier hs-type">getIncidentEdges</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span class="hs-special">]</span><span>
-</span><span id="line-29"></span><span id="getIncidentEdges"><span class="annot"><span class="annottext">getIncidentEdges :: BCG -&gt; Int -&gt; [BCE]
-</span><a href="BCG.html#getIncidentEdges"><span class="hs-identifier hs-var hs-var">getIncidentEdges</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span id="local-6989586621679033532"><span class="annot"><span class="annottext">[BCE]
-</span><a href="#local-6989586621679033532"><span class="hs-identifier hs-var">es</span></a></span></span><span> </span><span class="annot"><span class="annottext">IntSet
+</span><span id="line-27"></span><span class="hs-comment">-- | A 'BCG' with no edges or vertices and the number of different colors is 0</span><span>
+</span><span id="line-28"></span><span class="annot"><a href="BCG.html#empty"><span class="hs-identifier hs-type">empty</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span>
+</span><span id="line-29"></span><span id="empty"><span class="annot"><span class="annottext">empty :: BCG
+</span><a href="BCG.html#empty"><span class="hs-identifier hs-var hs-var">empty</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[BCE] -&gt; IntSet -&gt; Int -&gt; BCG
+</span><a href="BCG.html#BCG"><span class="hs-identifier hs-var">BCG</span></a></span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">IntSet
+</span><span class="hs-identifier hs-var">Set.empty</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-number">0</span></span><span>
+</span><span id="line-30"></span><span>
+</span><span id="line-31"></span><span class="hs-comment">-- * Functions</span><span>
+</span><span id="line-32"></span><span>
+</span><span id="line-33"></span><span class="hs-comment">-- | Get a list of perfect matchings on a 'BCG'</span><span>
+</span><span id="line-34"></span><span class="hs-comment">-- The perfect matchings are represented by the 'BCG' data type</span><span>
+</span><span id="line-35"></span><span class="annot"><a href="BCG.html#enumeratePM"><span class="hs-identifier hs-type">enumeratePM</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-36"></span><span id="enumeratePM"><span class="annot"><span class="annottext">enumeratePM :: BCG -&gt; [BCG]
+</span><a href="BCG.html#enumeratePM"><span class="hs-identifier hs-var hs-var">enumeratePM</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679033658"><span class="annot"><span class="annottext">BCE
+</span><a href="#local-6989586621679033658"><span class="hs-identifier hs-var">e</span></a></span></span><span class="annot"><span class="hs-glyph hs-type">:</span></span><span id="local-6989586621679033657"><span class="annot"><span class="annottext">[BCE]
+</span><a href="#local-6989586621679033657"><span class="hs-identifier hs-var">es</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679033656"><span class="annot"><span class="annottext">IntSet
+</span><a href="#local-6989586621679033656"><span class="hs-identifier hs-var">vs</span></a></span></span><span> </span><span id="local-6989586621679033655"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033655"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="hs-keyword">if</span><span> </span><span class="annot"><span class="annottext">Bool
+</span><a href="#local-6989586621679033654"><span class="hs-identifier hs-var">isPM</span></a></span><span> </span><span class="hs-keyword">then</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">[BCE] -&gt; IntSet -&gt; Int -&gt; BCG
+</span><a href="BCG.html#BCG"><span class="hs-identifier hs-var">BCG</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">BCE
+</span><a href="#local-6989586621679033658"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">IntSet
+</span><a href="#local-6989586621679033656"><span class="hs-identifier hs-var">vs</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033655"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">]</span><span> </span><span class="hs-keyword">else</span><span> </span><span class="annot"><span class="annottext">(BCG -&gt; BCG) -&gt; [BCG] -&gt; [BCG]
+forall a b. (a -&gt; b) -&gt; [a] -&gt; [b]
+</span><span class="hs-identifier hs-var">map</span></span><span> </span><span class="annot"><span class="annottext">BCG -&gt; BCG
+</span><a href="#local-6989586621679033653"><span class="hs-identifier hs-var">addMatchingBack</span></a></span><span> </span><span class="annot"><span class="annottext">([BCG] -&gt; [BCG]) -&gt; [BCG] -&gt; [BCG]
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">BCG -&gt; [BCG]
+</span><a href="BCG.html#enumeratePM"><span class="hs-identifier hs-var">enumeratePM</span></a></span><span> </span><span class="annot"><span class="annottext">BCG
+</span><a href="#local-6989586621679033652"><span class="hs-identifier hs-var">newSubG</span></a></span><span> </span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[BCG] -&gt; [BCG] -&gt; [BCG]
+forall a. [a] -&gt; [a] -&gt; [a]
+</span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">BCG -&gt; [BCG]
+</span><a href="BCG.html#enumeratePM"><span class="hs-identifier hs-var">enumeratePM</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[BCE] -&gt; IntSet -&gt; Int -&gt; BCG
+</span><a href="BCG.html#BCG"><span class="hs-identifier hs-var">BCG</span></a></span><span> </span><span class="annot"><span class="annottext">[BCE]
+</span><a href="#local-6989586621679033657"><span class="hs-identifier hs-var">es</span></a></span><span> </span><span class="annot"><span class="annottext">IntSet
+</span><a href="#local-6989586621679033656"><span class="hs-identifier hs-var">vs</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033655"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-37"></span><span>    </span><span class="hs-keyword">where</span><span> </span><span>
+</span><span id="line-38"></span><span>        </span><span id="local-6989586621679033654"><span class="annot"><span class="annottext">isPM :: Bool
+</span><a href="#local-6989586621679033654"><span class="hs-identifier hs-var hs-var">isPM</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">BCE
+</span><a href="#local-6989586621679033658"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-keyword">of</span><span> </span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span class="hs-special">{</span><span class="annot"><span class="annottext">fromV :: BCE -&gt; Int
+</span><a href="BCG.html#fromV"><span class="hs-identifier hs-var">fromV</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="local-6989586621679033651"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033651"><span class="hs-identifier hs-var">from</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">toV :: BCE -&gt; Int
+</span><a href="BCG.html#toV"><span class="hs-identifier hs-var">toV</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="local-6989586621679033650"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033650"><span class="hs-identifier hs-var">to</span></a></span></span><span class="hs-special">}</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[Int] -&gt; IntSet
+</span><span class="hs-identifier hs-var">Set.fromList</span></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033651"><span class="hs-identifier hs-var">from</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033650"><span class="hs-identifier hs-var">to</span></a></span><span class="hs-special">]</span><span> </span><span class="annot"><span class="annottext">IntSet -&gt; IntSet -&gt; Bool
+forall a. Eq a =&gt; a -&gt; a -&gt; Bool
+</span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">IntSet
+</span><a href="#local-6989586621679033656"><span class="hs-identifier hs-var">vs</span></a></span><span>
+</span><span id="line-39"></span><span>        </span><span id="local-6989586621679033652"><span class="annot"><span class="annottext">newSubG :: BCG
+</span><a href="#local-6989586621679033652"><span class="hs-identifier hs-var hs-var">newSubG</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">BCG -&gt; BCE -&gt; BCG
+</span><a href="BCG.html#removeEdgeAndIncidentVertices"><span class="hs-identifier hs-var">removeEdgeAndIncidentVertices</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">[BCE] -&gt; IntSet -&gt; Int -&gt; BCG
+</span><a href="BCG.html#BCG"><span class="hs-identifier hs-var">BCG</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">BCE
+</span><a href="#local-6989586621679033658"><span class="hs-identifier hs-var">e</span></a></span><span class="annot"><span class="annottext">BCE -&gt; [BCE] -&gt; [BCE]
+forall a. a -&gt; [a] -&gt; [a]
+</span><span class="hs-glyph hs-var">:</span></span><span class="annot"><span class="annottext">[BCE]
+</span><a href="#local-6989586621679033657"><span class="hs-identifier hs-var">es</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">IntSet
+</span><a href="#local-6989586621679033656"><span class="hs-identifier hs-var">vs</span></a></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033655"><span class="hs-identifier hs-var">c</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">BCE
+</span><a href="#local-6989586621679033658"><span class="hs-identifier hs-var">e</span></a></span><span>
+</span><span id="line-40"></span><span>        </span><span id="local-6989586621679033653"><span class="annot"><span class="annottext">addMatchingBack :: BCG -&gt; BCG
+</span><a href="#local-6989586621679033653"><span class="hs-identifier hs-var hs-var">addMatchingBack</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span id="local-6989586621679033647"><span class="annot"><span class="annottext">[BCE]
+</span><a href="#local-6989586621679033647"><span class="hs-identifier hs-var">mes</span></a></span></span><span> </span><span id="local-6989586621679033646"><span class="annot"><span class="annottext">IntSet
+</span><a href="#local-6989586621679033646"><span class="hs-identifier hs-var">mvs</span></a></span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">BCE
+</span><a href="#local-6989586621679033658"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-keyword">of</span><span> </span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span class="hs-special">{</span><span class="annot"><span class="annottext">fromV :: BCE -&gt; Int
+</span><a href="BCG.html#fromV"><span class="hs-identifier hs-var">fromV</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="local-6989586621679033645"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033645"><span class="hs-identifier hs-var">from</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">toV :: BCE -&gt; Int
+</span><a href="BCG.html#toV"><span class="hs-identifier hs-var">toV</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="local-6989586621679033644"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033644"><span class="hs-identifier hs-var">to</span></a></span></span><span class="hs-special">}</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">[BCE] -&gt; IntSet -&gt; Int -&gt; BCG
+</span><a href="BCG.html#BCG"><span class="hs-identifier hs-var">BCG</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">BCE
+</span><a href="#local-6989586621679033658"><span class="hs-identifier hs-var">e</span></a></span><span class="annot"><span class="annottext">BCE -&gt; [BCE] -&gt; [BCE]
+forall a. a -&gt; [a] -&gt; [a]
+</span><span class="hs-glyph hs-var">:</span></span><span class="annot"><span class="annottext">[BCE]
+</span><a href="#local-6989586621679033647"><span class="hs-identifier hs-var">mes</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; IntSet -&gt; IntSet
+</span><span class="hs-identifier hs-var">Set.insert</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033645"><span class="hs-identifier hs-var">from</span></a></span><span> </span><span class="annot"><span class="annottext">(IntSet -&gt; IntSet) -&gt; IntSet -&gt; IntSet
+forall a b. (a -&gt; b) -&gt; a -&gt; b
+</span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; IntSet -&gt; IntSet
+</span><span class="hs-identifier hs-var">Set.insert</span></span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033644"><span class="hs-identifier hs-var">to</span></a></span><span> </span><span class="annot"><span class="annottext">IntSet
+</span><a href="#local-6989586621679033646"><span class="hs-identifier hs-var">mvs</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033655"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span>
+</span><span id="line-41"></span><span class="annot"><a href="BCG.html#enumeratePM"><span class="hs-identifier hs-var">enumeratePM</span></a></span><span> </span><span class="annot"><span class="annottext">BCG
+</span><span class="hs-identifier">_</span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">[</span><span class="hs-special">]</span><span>
+</span><span id="line-42"></span><span>
+</span><span id="line-43"></span><span class="hs-comment">-- | Get a list of 'BCE's connected to a vertex</span><span>
+</span><span id="line-44"></span><span class="annot"><a href="BCG.html#getIncidentEdges"><span class="hs-identifier hs-type">getIncidentEdges</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-45"></span><span id="getIncidentEdges"><span class="annot"><span class="annottext">getIncidentEdges :: BCG -&gt; Int -&gt; [BCE]
+</span><a href="BCG.html#getIncidentEdges"><span class="hs-identifier hs-var hs-var">getIncidentEdges</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span id="local-6989586621679033641"><span class="annot"><span class="annottext">[BCE]
+</span><a href="#local-6989586621679033641"><span class="hs-identifier hs-var">es</span></a></span></span><span> </span><span class="annot"><span class="annottext">IntSet
 </span><span class="hs-identifier">_</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679033531"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033531"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(BCE -&gt; Bool) -&gt; [BCE] -&gt; [BCE]
+</span><span class="hs-identifier">_</span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679033640"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033640"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(BCE -&gt; Bool) -&gt; [BCE] -&gt; [BCE]
 forall a. (a -&gt; Bool) -&gt; [a] -&gt; [a]
 </span><span class="hs-identifier hs-var">filter</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; BCE -&gt; Bool
 </span><a href="BCG.html#isIncident"><span class="hs-identifier hs-var">isIncident</span></a></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033531"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[BCE]
-</span><a href="#local-6989586621679033532"><span class="hs-identifier hs-var">es</span></a></span><span>
-</span><span id="line-30"></span><span>
-</span><span id="line-31"></span><span class="hs-comment">-- | Determines if a vertex is connected to an 'BCE'</span><span>
-</span><span id="line-32"></span><span class="annot"><a href="BCG.html#isIncident"><span class="hs-identifier hs-type">isIncident</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
-</span><span id="line-33"></span><span id="isIncident"><span class="annot"><span class="annottext">isIncident :: Int -&gt; BCE -&gt; Bool
-</span><a href="BCG.html#isIncident"><span class="hs-identifier hs-var hs-var">isIncident</span></a></span></span><span> </span><span id="local-6989586621679033529"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033529"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span class="hs-special">{</span><span class="annot"><span class="annottext">fromV :: BCE -&gt; Int
-</span><a href="BCG.html#fromV"><span class="hs-identifier hs-var">fromV</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="local-6989586621679033528"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033528"><span class="hs-identifier hs-var">from</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">toV :: BCE -&gt; Int
-</span><a href="BCG.html#toV"><span class="hs-identifier hs-var">toV</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="local-6989586621679033527"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033527"><span class="hs-identifier hs-var">to</span></a></span></span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033529"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679033640"><span class="hs-identifier hs-var">v</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[BCE]
+</span><a href="#local-6989586621679033641"><span class="hs-identifier hs-var">es</span></a></span><span>
+</span><span id="line-46"></span><span>
+</span><span id="line-47"></span><span class="hs-comment">-- | Determines if a vertex is connected to an 'BCE'</span><span>
+</span><span id="line-48"></span><span class="annot"><a href="BCG.html#isIncident"><span class="hs-identifier hs-type">isIncident</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Bool</span></span><span>
+</span><span id="line-49"></span><span id="isIncident"><span class="annot"><span class="annottext">isIncident :: Int -&gt; BCE -&gt; Bool
+</span><a href="BCG.html#isIncident"><span class="hs-identifier hs-var hs-var">isIncident</span></a></span></span><span> </span><span id="local-6989586621679033638"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033638"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span class="hs-special">{</span><span class="annot"><span class="annottext">fromV :: BCE -&gt; Int
+</span><a href="BCG.html#fromV"><span class="hs-identifier hs-var">fromV</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="local-6989586621679033637"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033637"><span class="hs-identifier hs-var">from</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">toV :: BCE -&gt; Int
+</span><a href="BCG.html#toV"><span class="hs-identifier hs-var">toV</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="local-6989586621679033636"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033636"><span class="hs-identifier hs-var">to</span></a></span></span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033638"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033528"><span class="hs-identifier hs-var">from</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
+</span><a href="#local-6989586621679033637"><span class="hs-identifier hs-var">from</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool -&gt; Bool
 </span><span class="hs-operator hs-var">||</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033529"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
+</span><a href="#local-6989586621679033638"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Bool
 forall a. Eq a =&gt; a -&gt; a -&gt; Bool
 </span><span class="hs-operator hs-var">==</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033527"><span class="hs-identifier hs-var">to</span></a></span><span class="hs-special">)</span><span>
-</span><span id="line-34"></span><span>
-</span><span id="line-35"></span><span class="hs-comment">-- | Removes a vertex and the connected 'BCE's from a 'BCG'</span><span>
-</span><span id="line-36"></span><span class="annot"><a href="BCG.html#removeVertex"><span class="hs-identifier hs-type">removeVertex</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span>
-</span><span id="line-37"></span><span id="removeVertex"><span class="annot"><span class="annottext">removeVertex :: BCG -&gt; Int -&gt; BCG
-</span><a href="BCG.html#removeVertex"><span class="hs-identifier hs-var hs-var">removeVertex</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span id="local-6989586621679033524"><span class="annot"><span class="annottext">[BCE]
-</span><a href="#local-6989586621679033524"><span class="hs-identifier hs-var">es</span></a></span></span><span> </span><span id="local-6989586621679033523"><span class="annot"><span class="annottext">IntSet
-</span><a href="#local-6989586621679033523"><span class="hs-identifier hs-var">vs</span></a></span></span><span> </span><span id="local-6989586621679033522"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033522"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679033521"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033521"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[BCE] -&gt; IntSet -&gt; Int -&gt; BCG
+</span><a href="#local-6989586621679033636"><span class="hs-identifier hs-var">to</span></a></span><span class="hs-special">)</span><span>
+</span><span id="line-50"></span><span>
+</span><span id="line-51"></span><span class="hs-comment">-- | Removes a 'BCE' from a 'BCG' and the vertices it was incident to</span><span>
+</span><span id="line-52"></span><span class="annot"><a href="BCG.html#removeEdgeAndIncidentVertices"><span class="hs-identifier hs-type">removeEdgeAndIncidentVertices</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span>
+</span><span id="line-53"></span><span id="removeEdgeAndIncidentVertices"><span class="annot"><span class="annottext">removeEdgeAndIncidentVertices :: BCG -&gt; BCE -&gt; BCG
+</span><a href="BCG.html#removeEdgeAndIncidentVertices"><span class="hs-identifier hs-var hs-var">removeEdgeAndIncidentVertices</span></a></span></span><span> </span><span id="local-6989586621679033634"><span class="annot"><span class="annottext">BCG
+</span><a href="#local-6989586621679033634"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span class="annot"><a href="BCG.html#BCE"><span class="hs-identifier hs-type">BCE</span></a></span><span class="hs-special">{</span><span class="annot"><span class="annottext">fromV :: BCE -&gt; Int
+</span><a href="BCG.html#fromV"><span class="hs-identifier hs-var">fromV</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="local-6989586621679033633"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033633"><span class="hs-identifier hs-var">from</span></a></span></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">toV :: BCE -&gt; Int
+</span><a href="BCG.html#toV"><span class="hs-identifier hs-var">toV</span></a></span><span> </span><span class="hs-glyph">=</span><span> </span><span id="local-6989586621679033632"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033632"><span class="hs-identifier hs-var">to</span></a></span></span><span class="hs-special">}</span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">BCG -&gt; [Int] -&gt; BCG
+</span><a href="BCG.html#removeVertices"><span class="hs-identifier hs-var">removeVertices</span></a></span><span> </span><span class="annot"><span class="annottext">BCG
+</span><a href="#local-6989586621679033634"><span class="hs-identifier hs-var">g</span></a></span><span> </span><span class="hs-special">[</span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033633"><span class="hs-identifier hs-var">from</span></a></span><span class="hs-special">,</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033632"><span class="hs-identifier hs-var">to</span></a></span><span class="hs-special">]</span><span>
+</span><span id="line-54"></span><span>
+</span><span id="line-55"></span><span class="hs-comment">-- | Removes a vertex and the connected 'BCE's from a 'BCG'</span><span>
+</span><span id="line-56"></span><span class="annot"><a href="BCG.html#removeVertex"><span class="hs-identifier hs-type">removeVertex</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span>
+</span><span id="line-57"></span><span id="removeVertex"><span class="annot"><span class="annottext">removeVertex :: BCG -&gt; Int -&gt; BCG
+</span><a href="BCG.html#removeVertex"><span class="hs-identifier hs-var hs-var">removeVertex</span></a></span></span><span> </span><span class="hs-special">(</span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span id="local-6989586621679033629"><span class="annot"><span class="annottext">[BCE]
+</span><a href="#local-6989586621679033629"><span class="hs-identifier hs-var">es</span></a></span></span><span> </span><span id="local-6989586621679033628"><span class="annot"><span class="annottext">IntSet
+</span><a href="#local-6989586621679033628"><span class="hs-identifier hs-var">vs</span></a></span></span><span> </span><span id="local-6989586621679033627"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033627"><span class="hs-identifier hs-var">c</span></a></span></span><span class="hs-special">)</span><span> </span><span id="local-6989586621679033626"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033626"><span class="hs-identifier hs-var">v</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">[BCE] -&gt; IntSet -&gt; Int -&gt; BCG
 </span><a href="BCG.html#BCG"><span class="hs-identifier hs-var">BCG</span></a></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">(BCE -&gt; Bool) -&gt; [BCE] -&gt; [BCE]
 forall a. (a -&gt; Bool) -&gt; [a] -&gt; [a]
-</span><span class="hs-identifier hs-var">filter</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679033520"><span class="annot"><span class="annottext">BCE
-</span><a href="#local-6989586621679033520"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool
+</span><span class="hs-identifier hs-var">filter</span></span><span> </span><span class="hs-special">(</span><span class="hs-glyph">\</span><span id="local-6989586621679033625"><span class="annot"><span class="annottext">BCE
+</span><a href="#local-6989586621679033625"><span class="hs-identifier hs-var">e</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">Bool -&gt; Bool
 </span><span class="hs-identifier hs-var">not</span></span><span> </span><span class="annot"><span class="annottext">(Bool -&gt; Bool) -&gt; Bool -&gt; Bool
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033521"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; BCE -&gt; Bool
+</span><a href="#local-6989586621679033626"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; BCE -&gt; Bool
 </span><a href="BCG.html#isIncident"><span class="hs-operator hs-var">`isIncident`</span></a></span><span> </span><span class="annot"><span class="annottext">BCE
-</span><a href="#local-6989586621679033520"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[BCE]
-</span><a href="#local-6989586621679033524"><span class="hs-identifier hs-var">es</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; IntSet -&gt; IntSet
+</span><a href="#local-6989586621679033625"><span class="hs-identifier hs-var">e</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">[BCE]
+</span><a href="#local-6989586621679033629"><span class="hs-identifier hs-var">es</span></a></span><span class="hs-special">)</span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int -&gt; IntSet -&gt; IntSet
 </span><span class="hs-identifier hs-var">Set.delete</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033521"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">IntSet
-</span><a href="#local-6989586621679033523"><span class="hs-identifier hs-var">vs</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679033522"><span class="hs-identifier hs-var">c</span></a></span><span>
-</span><span id="line-38"></span><span>
-</span><span id="line-39"></span><span class="hs-comment">-- | Removes a list of vertices and their connected 'BCE's from a 'BCG'</span><span>
-</span><span id="line-40"></span><span class="annot"><a href="BCG.html#removeVertices"><span class="hs-identifier hs-type">removeVertices</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span>
-</span><span id="line-41"></span><span id="removeVertices"><span class="annot"><span class="annottext">removeVertices :: BCG -&gt; [Int] -&gt; BCG
+</span><a href="#local-6989586621679033626"><span class="hs-identifier hs-var">v</span></a></span><span> </span><span class="annot"><span class="annottext">IntSet
+</span><a href="#local-6989586621679033628"><span class="hs-identifier hs-var">vs</span></a></span><span class="hs-special">)</span><span> </span><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679033627"><span class="hs-identifier hs-var">c</span></a></span><span>
+</span><span id="line-58"></span><span>
+</span><span id="line-59"></span><span class="hs-comment">-- | Removes a list of vertices and their connected 'BCE's from a 'BCG'</span><span>
+</span><span id="line-60"></span><span class="annot"><a href="BCG.html#removeVertices"><span class="hs-identifier hs-type">removeVertices</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-special">[</span><span class="annot"><span class="hs-identifier hs-type">Int</span></span><span class="hs-special">]</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><a href="BCG.html#BCG"><span class="hs-identifier hs-type">BCG</span></a></span><span>
+</span><span id="line-61"></span><span id="removeVertices"><span class="annot"><span class="annottext">removeVertices :: BCG -&gt; [Int] -&gt; BCG
 </span><a href="BCG.html#removeVertices"><span class="hs-identifier hs-var hs-var">removeVertices</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">(BCG -&gt; Int -&gt; BCG) -&gt; BCG -&gt; [Int] -&gt; BCG
 forall (t :: * -&gt; *) b a.
 Foldable t =&gt;

@@ -34,11 +34,23 @@ BCE :: Int -> Int -> Int -> Int -> Complex Double -> BCE
 -- | Weight
 [w] :: BCE -> Complex Double
 
+-- | A <a>BCG</a> with no edges or vertices and the number of different
+--   colors is 0
+empty :: BCG
+
+-- | Get a list of perfect matchings on a <a>BCG</a> The perfect matchings
+--   are represented by the <a>BCG</a> data type
+enumeratePM :: BCG -> [BCG]
+
 -- | Get a list of <a>BCE</a>s connected to a vertex
 getIncidentEdges :: BCG -> Int -> [BCE]
 
 -- | Determines if a vertex is connected to an <a>BCE</a>
 isIncident :: Int -> BCE -> Bool
+
+-- | Removes a <a>BCE</a> from a <a>BCG</a> and the vertices it was
+--   incident to
+removeEdgeAndIncidentVertices :: BCG -> BCE -> BCG
 
 -- | Removes a vertex and the connected <a>BCE</a>s from a <a>BCG</a>
 removeVertex :: BCG -> Int -> BCG
