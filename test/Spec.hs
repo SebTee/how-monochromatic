@@ -79,9 +79,9 @@ main = hspec $ do
             it "returns a list of 8 perfect matchings" $ do
                 length (enumeratePM parsedBCG) `shouldBe` 8
             it "returns a list of perfect matchings where each perfect matching has the same set of vertices as the original graph" $ do
-                parsedBCG `shouldSatisfy` \(BCG _ vs _) -> foldr (&&) True $ map (\(BCG _ mvs _) -> mvs == vs) $ enumeratePM parsedBCG
+                parsedBCG `shouldSatisfy` \(BCG _ vs _) -> foldr ((&&) . (\(BCG _ mvs _) -> mvs == vs)) True (enumeratePM parsedBCG)
             it "returns a list of perfect matchings where each perfect matching has n/2 edges where n is the number of vertices" $ do
-                parsedBCG `shouldSatisfy` \(BCG _ vs _) -> foldr (&&) True $ map (\(BCG mes _ _) -> length mes == Set.size vs `div` 2) $ enumeratePM parsedBCG
+                parsedBCG `shouldSatisfy` \(BCG _ vs _) -> foldr ((&&) . (\(BCG mes _ _) -> length mes == Set.size vs `div` 2)) True (enumeratePM parsedBCG)
         context "when an empty graph is passed in" $ do
             it "returns an empty list" $ do
                 length (enumeratePM BCG.empty) `shouldBe` 0
