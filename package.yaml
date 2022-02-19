@@ -1,10 +1,10 @@
 name:                how-monochromatic
 version:             0.1.0.0
 github:              "SebTee/how-monochromatic"
-license:             BSD3
+license:             MIT
 author:              "Sebastian Tee"
 maintainer:          "seb.tom.tee@gmail.com"
-copyright:           "2021 Sebastian Tee"
+copyright:           "2022 Sebastian Tee"
 
 extra-source-files:
 - README.md
@@ -27,7 +27,7 @@ library:
   source-dirs: src
 
 executables:
-  how-monochromatic-exe:
+  howmono:
     main:                Main.hs
     source-dirs:         app
     ghc-options:

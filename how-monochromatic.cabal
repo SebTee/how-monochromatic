@@ -11,8 +11,8 @@ homepage:       https://github.com/SebTee/how-monochromatic#readme
 bug-reports:    https://github.com/SebTee/how-monochromatic/issues
 author:         Sebastian Tee
 maintainer:     seb.tom.tee@gmail.com
-copyright:      2021 Sebastian Tee
-license:        BSD3
+copyright:      2022 Sebastian Tee
+license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
@@ -36,7 +36,7 @@ library
     , containers >0.6
   default-language: Haskell2010
 
-executable how-monochromatic-exe
+executable howmono
   main-is: Main.hs
   other-modules:
       Paths_how_monochromatic
