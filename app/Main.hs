@@ -11,7 +11,7 @@ main :: IO ()
 main = do
     contents <- getContents
     case parse contents of
-        Right g -> print $ enumeratePM g
+        Right g -> print $ dist g
         Left (e, l) -> case e of 
             IncorrectNumberOfParameters -> die $ errMsg "Incorrect number of parameters" l contents
             ComplexNumberParseFailure -> die $ errMsg "Failed to parse the complex number" l contents
