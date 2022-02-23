@@ -11,7 +11,7 @@
 -- | Library for handling bi-coloured graphs
 module BCG
 
--- | Bi-Coloured Graph
+-- | Bi-Colored Graph
 data BCG
 BCG :: [BCE] -> IntSet -> Int -> BCG
 
@@ -33,6 +33,12 @@ BCE :: Int -> Int -> Int -> Int -> Complex Double -> BCE
 
 -- | Weight
 [w] :: BCE -> Complex Double
+
+-- | Inherited Vertex Coloring
+type IVC = Set (Int, Int)
+
+-- | Perfect Matching
+type PM = BCG
 
 -- | A <a>BCG</a> with no edges or vertices and the number of different
 --   colors is 0
@@ -58,6 +64,24 @@ removeVertex :: BCG -> Int -> BCG
 -- | Removes a list of vertices and their connected <a>BCE</a>s from a
 --   <a>BCG</a>
 removeVertices :: BCG -> [Int] -> BCG
+
+-- | Checks if all edges on a <a>PM</a> are monochromatic and have the same
+--   color
+isMonochromatic :: PM -> Bool
+
+-- | Takes a list of <a>PM</a>s with the same <a>IVC</a> and returns the
+--   <a>IVC</a>'s weight
+coloringWeight :: [PM] -> Complex Double
+
+-- | Get the <a>IVC</a> of a <a>PM</a>
+pmsIvc :: PM -> IVC
+
+-- | Groups a list of <a>PM</a>'s by <a>IVC</a>
+groupByIvc :: [PM] -> [[PM]]
+
+-- | Return a value between 0 and 1 representing a <a>BCG</a>'s distance to
+--   the monochromatic
+dist :: BCG -> Double
 instance GHC.Show.Show BCG.BCE
 instance GHC.Show.Show BCG.BCG
 
