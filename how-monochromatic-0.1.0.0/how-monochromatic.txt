@@ -44,6 +44,11 @@ type PM = BCG
 --   colors is 0
 empty :: BCG
 
+-- | Return a value between 0 and 1 representing a <a>BCG</a>'s distance to
+--   the monochromatic &lt;math&gt; Where &lt;math&gt; is an <a>IVC</a> on
+--   &lt;math&gt; and &lt;math&gt; is the colouring weight of &lt;math&gt;.
+dist :: BCG -> Double
+
 -- | Get a list of perfect matchings on a <a>BCG</a> The perfect matchings
 --   are represented by the <a>BCG</a> data type
 enumeratePM :: BCG -> [BCG]
@@ -78,10 +83,6 @@ pmsIvc :: PM -> IVC
 
 -- | Groups a list of <a>PM</a>'s by <a>IVC</a>
 groupByIvc :: [PM] -> [[PM]]
-
--- | Return a value between 0 and 1 representing a <a>BCG</a>'s distance to
---   the monochromatic
-dist :: BCG -> Double
 instance GHC.Show.Show BCG.BCE
 instance GHC.Show.Show BCG.BCG
 
@@ -89,7 +90,34 @@ instance GHC.Show.Show BCG.BCG
 -- | Library for parsing strings into <a>BCG</a>
 module ParseBCG
 
--- | Parse a string into <a>BCG</a>
+-- | Parse a string into <a>BCG</a> Each line of the string represents an
+--   edge. Each line is made up of 6 elements in a specific order separated
+--   by spaces. The elements are
+--   
+--   <ol>
+--   <li>vertex_id_0</li>
+--   <li>colour_id_0</li>
+--   <li>vertex_id_1</li>
+--   <li>colour_id_1</li>
+--   <li>weight_real_part</li>
+--   <li>weight_imaginary_part</li>
+--   </ol>
+--   
+--   <pre>
+--   1 green 2 green 1 0
+--   1 blue  3 blue  1 0
+--   1 red   4 green 0 1
+--   1 red   6 red   1 0
+--   2 red   3 red   1 0
+--   2 blue  5 blue  1 0
+--   3 green 4 green 1 0
+--   3 green 6 red   0 1
+--   4 red   5 red   1 0
+--   4 red   6 green 0 1
+--   4 blue  6 blue  1 0
+--   5 green 6 green 1 0
+--   </pre>
+--   
 parse :: String -> Either (ParseException, Int) BCG
 
 -- | Exceptions returned by the parser
