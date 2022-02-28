@@ -37,6 +37,23 @@ empty = BCG [] IntSet.empty 0
 
 -- * Functions
 
+-- | Return a value between 0 and 1 representing a 'BCG'\'s distance to the monochromatic
+-- \[dist(G) = \begin{cases} 
+--     0 & G \text{ has no perfect matchings} \\
+--     \frac{\left|\displaystyle\sum_{c_i \in G,\ c_i\ \text{is monochromatic}} w(c_i)\right|^2}{d\cdot\left(\displaystyle\sum_{c_i \in G} |w(c_i)|^2\right)} & \text{Otherwise}
+-- \end{cases}\]
+-- Where \(c_i\) is an 'IVC' on \(G\) and \(w(c_i)\) is the colouring weight of \(c_i\).
+dist :: BCG -> Double
+dist g 
+    | null pms = 0 -- return 0 in the case of no perfect matchings
+    | otherwise = case g of
+        (BCG _ _ d) -> (magnitude (sum $ map coloringWeight monochromaticIvcs) ^ 2) / (fromIntegral d * norm)
+    where
+        pms = enumeratePM g
+        ivcs = groupByIvc pms
+        monochromaticIvcs = filter (\(pm:_) -> isMonochromatic pm) ivcs
+        norm = sum $ map (\c -> magnitude (coloringWeight c) ^ 2) ivcs
+
 -- | Get a list of perfect matchings on a 'BCG'
 -- The perfect matchings are represented by the 'BCG' data type
 enumeratePM :: BCG -> [BCG]
@@ -95,15 +112,3 @@ groupByIvc (p:ps) = (p : sameIvc) : groupByIvc diffIvc
         sameIvc = filter hasSameIvc ps
         diffIvc = filter (not . hasSameIvc) ps
 groupByIvc _ = []
-
--- | Return a value between 0 and 1 representing a 'BCG'\'s distance to the monochromatic
-dist :: BCG -> Double
-dist g 
-    | null pms = 0 -- return 0 in the case of no perfect matchings
-    | otherwise = case g of
-        (BCG _ _ d) -> (magnitude (sum $ map coloringWeight monochromaticIvcs) ^ 2) / (fromIntegral d * norm)
-    where
-        pms = enumeratePM g
-        ivcs = groupByIvc pms
-        monochromaticIvcs = filter (\(pm:_) -> isMonochromatic pm) ivcs
-        norm = sum $ map (\c -> magnitude (coloringWeight c) ^ 2) ivcs

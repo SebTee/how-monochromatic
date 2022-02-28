@@ -11,6 +11,32 @@ import qualified Data.IntSet as Set
 import Text.Read (readMaybe)
 
 -- | Parse a string into 'BCG.BCG'
+-- Each line of the string represents an edge. Each line is made up of 6 elements in a specific order separated by spaces.
+-- The elements are
+-- 
+-- 1. vertex_id_0
+-- 2. colour_id_0
+-- 3. vertex_id_1
+-- 4. colour_id_1
+-- 5. weight_real_part
+-- 6. weight_imaginary_part
+-- 
+-- @
+-- 1 green 2 green 1 0
+-- 1 blue  3 blue  1 0
+-- 1 red   4 green 0 1
+-- 1 red   6 red   1 0
+-- 2 red   3 red   1 0
+-- 2 blue  5 blue  1 0
+-- 3 green 4 green 1 0
+-- 3 green 6 red   0 1
+-- 4 red   5 red   1 0
+-- 4 red   6 green 0 1
+-- 4 blue  6 blue  1 0
+-- 5 green 6 green 1 0
+-- @
+--
+-- ![example bi-colored graph](/assets/ExampleGraph.png)
 parse :: String -> Either (ParseException, Int) BCG
 parse s = case parsePossibleBCETokens $ map parseLine $ filter (not . null) $ map words $ lines s of
   Right tokens -> Right $ parseBCETokens (P Map.empty Map.empty) tokens
