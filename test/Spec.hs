@@ -64,6 +64,9 @@ main = hspec $ do
         context "when provided with valid input" $ do
             it "parses Successfully" $ do
                 parse validBCG `shouldSatisfy` isRight
+        context "when an empty string is passed in" $ do
+            it "returns an empty graph" $ do
+                show (parse "") `shouldBe` show (Right BCG.empty :: Either (ParseException, Int) BCG)
         context "when provided with an input with invalid complex number" $ do
             it "returns a ComplexNumberParseFailure exception and the first line the error occurred" $ do
                 show (parse invalidComplexNumBCG) `shouldBe` show (Left (ComplexNumberParseFailure, 3) :: Either (ParseException, Int) BCG)
