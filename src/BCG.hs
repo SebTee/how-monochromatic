@@ -98,8 +98,10 @@ groupByIvc _ = []
 
 -- | Return a value between 0 and 1 representing a 'BCG'\'s distance to the monochromatic
 dist :: BCG -> Double
-dist g = case g of
-    (BCG _ _ d) -> (magnitude (sum $ map coloringWeight monochromaticIvcs) ^ 2) / (fromIntegral d * norm)
+dist g 
+    | null pms = 0 -- return 0 in the case of no perfect matchings
+    | otherwise = case g of
+        (BCG _ _ d) -> (magnitude (sum $ map coloringWeight monochromaticIvcs) ^ 2) / (fromIntegral d * norm)
     where
         pms = enumeratePM g
         ivcs = groupByIvc pms
