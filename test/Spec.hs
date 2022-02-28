@@ -85,3 +85,11 @@ main = hspec $ do
         context "when an empty graph is passed in" $ do
             it "returns an empty list" $ do
                 length (enumeratePM BCG.empty) `shouldBe` 0
+
+    describe "dist" $ do
+        context "when a graph with a distance to the monochromatic is 0.5 is passed in" $ do
+            it "returns 0.5" $ do
+                dist parsedBCG `shouldBe` 0.5
+        context "when a graph with no perfect matchings is passed in" $ do
+            it "returns 0" $ do
+                dist BCG.empty `shouldBe` 0
