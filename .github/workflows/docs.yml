@@ -1,0 +1,29 @@
+name: Docs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-haskell@v1
+      with:
+        enable-stack: true
+
+    - name: Generate docs
+      run: |
+        stack haddock &&\
+        cp -r $(stack path --local-doc-root) ./ &&\
+        cp -r ./assets ./doc
+    - name: Publish docs
+      uses: JamesIves/github-pages-deploy-action@v4.2.3
+      with:
+        folder: doc
+        branch: docs

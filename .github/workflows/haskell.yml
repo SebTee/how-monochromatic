@@ -21,15 +21,3 @@ jobs:
       run: stack build
     - name: Run tests
       run: stack test
-    - name: Generate docs
-      run: |
-        stack haddock &&\
-        cp -r $(stack path --local-doc-root) ./ &&\
-        cp -r ./assets ./doc
-    - name: Publish docs
-      uses: JamesIves/github-pages-deploy-action@v4.2.3
-      with:
-        folder: doc
-        branch: docs
-          
-      
