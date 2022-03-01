@@ -103,6 +103,8 @@ module ParseBCG
 --   <li>weight_imaginary_part</li>
 --   </ol>
 --   
+--   <b>Example</b>
+--   
 --   <pre>
 --   1 green 2 green 1 0
 --   1 blue  3 blue  1 0
