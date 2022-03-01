@@ -21,6 +21,8 @@ import Text.Read (readMaybe)
 -- 5. weight_real_part
 -- 6. weight_imaginary_part
 -- 
+-- __Example__
+--
 -- @
 -- 1 green 2 green 1 0
 -- 1 blue  3 blue  1 0
@@ -36,7 +38,7 @@ import Text.Read (readMaybe)
 -- 5 green 6 green 1 0
 -- @
 --
--- ![example bi-colored graph](/assets/ExampleGraph.png)
+-- ![example bi-colored graph](../assets/ExampleGraph.png)
 parse :: String -> Either (ParseException, Int) BCG
 parse s = case parsePossibleBCETokens $ map parseLine $ filter (not . null) $ map words $ lines s of
   Right tokens -> Right $ parseBCETokens (P Map.empty Map.empty) tokens
