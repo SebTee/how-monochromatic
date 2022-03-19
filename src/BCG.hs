@@ -42,9 +42,9 @@ empty = BCG [] IntSet.empty 0
 --     0 & G \text{ has no perfect matchings} \\
 --     \frac{\left|\displaystyle\sum_{c_i \in G,\ c_i\ \text{is monochromatic}} w(c_i)\right|^2}{d\cdot\left(\displaystyle\sum_{c_i \in G} |w(c_i)|^2\right)} & \text{Otherwise}
 -- \end{cases}\]
--- Where \(c_i\) is an 'IVC' on \(G\) and \(w(c_i)\) is the colouring weight of \(c_i\).
+-- Where \(c_i\) is an 'IVC' on \(G\), \(d\) is the number of different colors on \(G\) and \(w(c_i)\) is the colouring weight of \(c_i\).
 dist :: BCG -> Double
-dist g 
+dist g
     | null pms = 0 -- return 0 in the case of no perfect matchings
     | otherwise = case g of
         (BCG _ _ d) -> (magnitude (sum $ map coloringWeight monochromaticIvcs) ^ 2) / (fromIntegral d * norm)
@@ -112,3 +112,28 @@ groupByIvc (p:ps) = (p : sameIvc) : groupByIvc diffIvc
         sameIvc = filter hasSameIvc ps
         diffIvc = filter (not . hasSameIvc) ps
 groupByIvc _ = []
+
+-- | Check if 2 vertices are adjacent
+isAdjacent :: BCG -> Int -> Int -> Bool
+isAdjacent g from to = IntSet.member to $ getAdjacent g from
+
+-- | Get a set of adjacent nodes
+getAdjacent :: BCG -> Int -> IntSet.IntSet
+getAdjacent (BCG es _ _) v = IntSet.delete v $ IntSet.fromList $ concat $ filter (elem v) $ map (\BCE{fromV = fv, toV = tv} -> [fv, tv]) es
+
+-- | get list of vertices connected to a vertex on a 'BCG'
+getConnected :: BCG -> Int -> IntSet.IntSet
+getConnected g v = IntSet.delete v $ gc (IntSet.singleton v) g v
+    where
+        gc :: IntSet.IntSet -> BCG -> Int -> IntSet.IntSet
+        gc r g v = foldr (IntSet.union . gc nr g) IntSet.empty (IntSet.toList yetToVisit)
+            where
+                adj = getAdjacent g v
+                yetToVisit = IntSet.filter (\e -> not $ IntSet.member e r) adj
+                nr = adj `IntSet.union` r
+
+-- | Determine if a given 'BCG' is a fully connected graph
+isConnectedGraph :: BCG -> Bool
+isConnectedGraph g = case g of 
+    BCG _ vs _ -> IntSet.delete start vs == getConnected g start
+        where start = head $ IntSet.toList vs
