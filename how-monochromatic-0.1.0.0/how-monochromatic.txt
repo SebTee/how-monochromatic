@@ -46,6 +46,7 @@ empty :: BCG
 
 -- | Return a value between 0 and 1 representing a <a>BCG</a>'s distance to
 --   the monochromatic &lt;math&gt; Where &lt;math&gt; is an <a>IVC</a> on
+--   &lt;math&gt;, &lt;math&gt; is the number of different colors on
 --   &lt;math&gt; and &lt;math&gt; is the colouring weight of &lt;math&gt;.
 dist :: BCG -> Double
 
@@ -83,6 +84,18 @@ pmsIvc :: PM -> IVC
 
 -- | Groups a list of <a>PM</a>'s by <a>IVC</a>
 groupByIvc :: [PM] -> [[PM]]
+
+-- | Check if 2 vertices are adjacent
+isAdjacent :: BCG -> Int -> Int -> Bool
+
+-- | Get a set of adjacent nodes
+getAdjacent :: BCG -> Int -> IntSet
+
+-- | get list of vertices connected to a vertex on a <a>BCG</a>
+getConnected :: BCG -> Int -> IntSet
+
+-- | Determine if a given <a>BCG</a> is a fully connected graph
+isConnectedGraph :: BCG -> Bool
 instance GHC.Show.Show BCG.BCE
 instance GHC.Show.Show BCG.BCG
 
