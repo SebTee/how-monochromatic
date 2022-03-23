@@ -4,6 +4,7 @@ module BCG where
 import Data.Complex
 import qualified Data.IntSet as IntSet
 import qualified Data.Set as Set
+import Data.List (subsequences)
 
 -- * Data Types
 
@@ -45,7 +46,7 @@ empty = BCG [] IntSet.empty 0
 -- Where \(c_i\) is an 'IVC' on \(G\), \(d\) is the number of different colors on \(G\) and \(w(c_i)\) is the colouring weight of \(c_i\).
 dist :: BCG -> Double
 dist g
-    | null pms = 0 -- return 0 in the case of no perfect matchings
+    | norm == 0 = 0 -- return 0 in the case of no perfect matchings
     | otherwise = case g of
         (BCG _ _ d) -> (magnitude (sum $ map coloringWeight monochromaticIvcs) ^ 2) / (fromIntegral d * norm)
     where
@@ -126,7 +127,7 @@ getConnected :: BCG -> Int -> IntSet.IntSet
 getConnected g v = IntSet.delete v $ gc (IntSet.singleton v) g v
     where
         gc :: IntSet.IntSet -> BCG -> Int -> IntSet.IntSet
-        gc r g v = foldr (IntSet.union . gc nr g) IntSet.empty (IntSet.toList yetToVisit)
+        gc r g v = foldr (IntSet.union . gc nr g) IntSet.empty (IntSet.toList yetToVisit) `IntSet.union` nr
             where
                 adj = getAdjacent g v
                 yetToVisit = IntSet.filter (\e -> not $ IntSet.member e r) adj
@@ -134,6 +135,10 @@ getConnected g v = IntSet.delete v $ gc (IntSet.singleton v) g v
 
 -- | Determine if a given 'BCG' is a fully connected graph
 isConnectedGraph :: BCG -> Bool
-isConnectedGraph g = case g of 
+isConnectedGraph g = case g of
     BCG _ vs _ -> IntSet.delete start vs == getConnected g start
         where start = head $ IntSet.toList vs
+
+-- | Counts the number of different colors on a 'BCG'
+numberDifferentColors :: BCG -> Int
+numberDifferentColors (BCG es _ _) = IntSet.size $ IntSet.fromList $ concatMap (\BCE{fromC = f, toC = t} -> [f, t]) es
