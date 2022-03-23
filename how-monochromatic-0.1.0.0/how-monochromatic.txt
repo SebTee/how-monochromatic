@@ -96,6 +96,9 @@ getConnected :: BCG -> Int -> IntSet
 
 -- | Determine if a given <a>BCG</a> is a fully connected graph
 isConnectedGraph :: BCG -> Bool
+
+-- | Counts the number of different colors on a <a>BCG</a>
+numberDifferentColors :: BCG -> Int
 instance GHC.Show.Show BCG.BCE
 instance GHC.Show.Show BCG.BCG
 
