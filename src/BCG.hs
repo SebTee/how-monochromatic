@@ -4,7 +4,6 @@ module BCG where
 import Data.Complex
 import qualified Data.IntSet as IntSet
 import qualified Data.Set as Set
-import Data.List (subsequences)
 
 -- * Data Types
 

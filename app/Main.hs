@@ -2,9 +2,6 @@ module Main where
 
 import BCG
 import ParseBCG
-import Data.Either
-import System.IO
-import qualified Data.IntSet as Set
 import System.Exit
 
 main :: IO ()
