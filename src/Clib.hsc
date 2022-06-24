@@ -1,13 +1,16 @@
 {-# LANGUAGE ForeignFunctionInterface #-}
+-- | C library for calling the how monochromatic function
 module Clib where
 
 import BCG
 import ParseBCG
-import Data.Char
 import Foreign.C.String
 import Foreign.C.Types
-import Foreign.Ptr
 
+-- | Input a C language string, following the convention defined for 'ParseBCG.parse', 
+-- and have the parsed 'BCG.BCG'\'s 'BCG.dist' value returned.
+-- 
+-- Can also be called as @how_mono(g)@ to follow C function naming conventions.
 howMono :: CString -> IO CDouble
 howMono cStr = do
   str <- peekCString cStr
@@ -19,4 +22,7 @@ howMono cStr = do
   where
     errMsg m l c = m ++ " on line " ++ show l ++ "\n\n" ++ lines c !! (l - 1)
 
+
+foreign export ccall howMono :: CString -> IO CDouble
+-- The exported function follows the C naming convention
 foreign export ccall "how_mono" howMono :: CString -> IO CDouble
