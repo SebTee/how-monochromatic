@@ -150,5 +150,14 @@ ComplexNumberParseFailure :: ParseException
 instance GHC.Show.Show ParseBCG.ParseException
 instance GHC.Show.Show ParseBCG.BCEToken
 
+
+-- | C library for calling the how monochromatic function
 module Clib
+
+-- | Input a C language string, following the convention defined for
+--   <a>parse</a>, and have the parsed <a>BCG</a>'s <a>dist</a> value
+--   returned.
+--   
+--   Can also be called as <tt>how_mono(g)</tt> to follow C function naming
+--   conventions.
 howMono :: CString -> IO CDouble
