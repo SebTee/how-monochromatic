@@ -1,4 +1,12 @@
--- | Library for parsing strings into 'BCG.BCG'
+{-|
+Module      : ParseBCG
+Description : parse bi-coloured graphs
+Copyright   : (c) Sebastian Tee, 2022
+License     : MIT
+Maintainer  : github.com/SebTee
+
+Library for parsing strings into 'BCG.BCG'
+-}
 module ParseBCG (
     parse,
     ParseException (IncorrectNumberOfParameters, ComplexNumberParseFailure)

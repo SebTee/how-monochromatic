@@ -1,4 +1,12 @@
--- | Library for handling bi-coloured graphs
+{-|
+Module      : BCG
+Description : bi-coloured graphs
+Copyright   : (c) Sebastian Tee, 2022
+License     : MIT
+Maintainer  : github.com/SebTee
+
+Library for handling bi-coloured graphs
+-}
 module BCG where
 
 import Data.Complex

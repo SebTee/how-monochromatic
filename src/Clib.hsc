@@ -1,5 +1,13 @@
 {-# LANGUAGE ForeignFunctionInterface #-}
--- | C library for calling the how monochromatic function
+{-|
+Module      : Clib
+Description : C library
+Copyright   : (c) Sebastian Tee, 2022
+License     : MIT
+Maintainer  : github.com/SebTee
+
+C library for calling the how monochromatic function
+-}
 module Clib where
 
 import BCG
