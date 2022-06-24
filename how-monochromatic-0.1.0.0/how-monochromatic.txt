@@ -149,3 +149,6 @@ IncorrectNumberOfParameters :: ParseException
 ComplexNumberParseFailure :: ParseException
 instance GHC.Show.Show ParseBCG.ParseException
 instance GHC.Show.Show ParseBCG.BCEToken
+
+module Clib
+howMono :: CString -> IO CDouble
