@@ -1,30 +1,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><link rel="stylesheet" type="text/css" href="style.css" /><script type="text/javascript" src="highlight.js"></script></head><body><pre><span class="hs-pragma">{-# LINE 1 &quot;src/Clib.hsc&quot; #-}</span><span>
 </span><span id="line-1"></span><span class="hs-pragma">{-# LANGUAGE ForeignFunctionInterface #-}</span><span>
-</span><span id="line-2"></span><span class="hs-comment">-- | C library for calling the how monochromatic function</span><span>
-</span><span id="line-3"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Clib</span><span> </span><span class="hs-keyword">where</span><span>
-</span><span id="line-4"></span><span>
-</span><span id="line-5"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="BCG.html"><span class="hs-identifier">BCG</span></a></span><span>
-</span><span id="line-6"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="ParseBCG.html"><span class="hs-identifier">ParseBCG</span></a></span><span>
-</span><span id="line-7"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Foreign.C.String</span></span><span>
-</span><span id="line-8"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Foreign.C.Types</span></span><span>
-</span><span id="line-9"></span><span>
-</span><span id="line-10"></span><span class="hs-comment">-- | Input a C language string, following the convention defined for 'ParseBCG.parse', </span><span>
-</span><span id="line-11"></span><span class="hs-comment">-- and have the parsed 'BCG.BCG'\'s 'BCG.dist' value returned.</span><span>
-</span><span id="line-12"></span><span class="hs-comment">-- </span><span>
-</span><span id="line-13"></span><span class="hs-comment">-- Can also be called as @how_mono(g)@ to follow C function naming conventions.</span><span>
-</span><span id="line-14"></span><span class="annot"><a href="Clib.html#howMono"><span class="hs-identifier hs-type">howMono</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">CString</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CDouble</span></span><span>
-</span><span id="line-15"></span><span id="howMono"><span class="annot"><span class="annottext">howMono :: CString -&gt; IO CDouble
-</span><a href="Clib.html#howMono"><span class="hs-identifier hs-var hs-var">howMono</span></a></span></span><span> </span><span id="local-6989586621679035316"><span class="annot"><span class="annottext">CString
-</span><a href="#local-6989586621679035316"><span class="hs-identifier hs-var">cStr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
-</span><span id="line-16"></span><span>  </span><span id="local-6989586621679035315"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679035315"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">CString -&gt; IO String
+</span><span id="line-2"></span><span class="hs-comment">{-|
+Module      : Clib
+Description : C library
+Copyright   : (c) Sebastian Tee, 2022
+License     : MIT
+Maintainer  : github.com/SebTee
+
+C library for calling the how monochromatic function
+-}</span><span>
+</span><span id="line-11"></span><span class="hs-keyword">module</span><span> </span><span class="hs-identifier">Clib</span><span> </span><span class="hs-keyword">where</span><span>
+</span><span id="line-12"></span><span>
+</span><span id="line-13"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="BCG.html"><span class="hs-identifier">BCG</span></a></span><span>
+</span><span id="line-14"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><a href="ParseBCG.html"><span class="hs-identifier">ParseBCG</span></a></span><span>
+</span><span id="line-15"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Foreign.C.String</span></span><span>
+</span><span id="line-16"></span><span class="hs-keyword">import</span><span> </span><span class="annot"><span class="hs-identifier">Foreign.C.Types</span></span><span>
+</span><span id="line-17"></span><span>
+</span><span id="line-18"></span><span class="hs-comment">-- | Input a C language string, following the convention defined for 'ParseBCG.parse', </span><span>
+</span><span id="line-19"></span><span class="hs-comment">-- and have the parsed 'BCG.BCG'\'s 'BCG.dist' value returned.</span><span>
+</span><span id="line-20"></span><span class="hs-comment">-- </span><span>
+</span><span id="line-21"></span><span class="hs-comment">-- Can also be called as @how_mono(g)@ to follow C function naming conventions.</span><span>
+</span><span id="line-22"></span><span class="annot"><a href="Clib.html#howMono"><span class="hs-identifier hs-type">howMono</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">CString</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CDouble</span></span><span>
+</span><span id="line-23"></span><span id="howMono"><span class="annot"><span class="annottext">howMono :: CString -&gt; IO CDouble
+</span><a href="Clib.html#howMono"><span class="hs-identifier hs-var hs-var">howMono</span></a></span></span><span> </span><span id="local-6989586621679035309"><span class="annot"><span class="annottext">CString
+</span><a href="#local-6989586621679035309"><span class="hs-identifier hs-var">cStr</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="hs-keyword">do</span><span>
+</span><span id="line-24"></span><span>  </span><span id="local-6989586621679035308"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679035308"><span class="hs-identifier hs-var">str</span></a></span></span><span> </span><span class="hs-glyph">&lt;-</span><span> </span><span class="annot"><span class="annottext">CString -&gt; IO String
 </span><span class="hs-identifier hs-var">peekCString</span></span><span> </span><span class="annot"><span class="annottext">CString
-</span><a href="#local-6989586621679035316"><span class="hs-identifier hs-var">cStr</span></a></span><span>
-</span><span id="line-17"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">String -&gt; Either (ParseException, Int) BCG
+</span><a href="#local-6989586621679035309"><span class="hs-identifier hs-var">cStr</span></a></span><span>
+</span><span id="line-25"></span><span>  </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">String -&gt; Either (ParseException, Int) BCG
 </span><a href="ParseBCG.html#parse"><span class="hs-identifier hs-var">parse</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679035315"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-18"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679035312"><span class="annot"><span class="annottext">BCG
-</span><a href="#local-6989586621679035312"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CDouble -&gt; IO CDouble
+</span><a href="#local-6989586621679035308"><span class="hs-identifier hs-var">str</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-26"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Right</span></span><span> </span><span id="local-6989586621679035305"><span class="annot"><span class="annottext">BCG
+</span><a href="#local-6989586621679035305"><span class="hs-identifier hs-var">g</span></a></span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">CDouble -&gt; IO CDouble
 forall (m :: * -&gt; *) a. Monad m =&gt; a -&gt; m a
 </span><span class="hs-identifier hs-var">return</span></span><span> </span><span class="annot"><span class="annottext">(CDouble -&gt; IO CDouble) -&gt; CDouble -&gt; IO CDouble
 forall a b. (a -&gt; b) -&gt; a -&gt; b
@@ -33,38 +41,38 @@ forall a b. (a -&gt; b) -&gt; a -&gt; b
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">BCG -&gt; Double
 </span><a href="BCG.html#dist"><span class="hs-identifier hs-var">dist</span></a></span><span> </span><span class="annot"><span class="annottext">BCG
-</span><a href="#local-6989586621679035312"><span class="hs-identifier hs-var">g</span></a></span><span>
-</span><span id="line-19"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679035309"><span class="annot"><span class="annottext">ParseException
-</span><a href="#local-6989586621679035309"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679035308"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679035308"><span class="hs-identifier hs-var">l</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ParseException
-</span><a href="#local-6989586621679035309"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-keyword">of</span><span>
-</span><span id="line-20"></span><span>      </span><span class="annot"><span class="annottext">ParseException
+</span><a href="#local-6989586621679035305"><span class="hs-identifier hs-var">g</span></a></span><span>
+</span><span id="line-27"></span><span>    </span><span class="annot"><span class="hs-identifier hs-type">Left</span></span><span> </span><span class="hs-special">(</span><span id="local-6989586621679035302"><span class="annot"><span class="annottext">ParseException
+</span><a href="#local-6989586621679035302"><span class="hs-identifier hs-var">e</span></a></span></span><span class="hs-special">,</span><span> </span><span id="local-6989586621679035301"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679035301"><span class="hs-identifier hs-var">l</span></a></span></span><span class="hs-special">)</span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="hs-keyword">case</span><span> </span><span class="annot"><span class="annottext">ParseException
+</span><a href="#local-6989586621679035302"><span class="hs-identifier hs-var">e</span></a></span><span> </span><span class="hs-keyword">of</span><span>
+</span><span id="line-28"></span><span>      </span><span class="annot"><span class="annottext">ParseException
 </span><a href="ParseBCG.html#IncorrectNumberOfParameters"><span class="hs-identifier hs-var">IncorrectNumberOfParameters</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO CDouble
 forall a. HasCallStack =&gt; String -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO CDouble) -&gt; String -&gt; IO CDouble
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int -&gt; String -&gt; String
-</span><a href="#local-6989586621679035305"><span class="hs-identifier hs-var">errMsg</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679035298"><span class="hs-identifier hs-var">errMsg</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;Incorrect number of parameters&quot;</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679035308"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679035315"><span class="hs-identifier hs-var">str</span></a></span><span>
-</span><span id="line-21"></span><span>      </span><span class="annot"><span class="annottext">ParseException
+</span><a href="#local-6989586621679035301"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679035308"><span class="hs-identifier hs-var">str</span></a></span><span>
+</span><span id="line-29"></span><span>      </span><span class="annot"><span class="annottext">ParseException
 </span><a href="ParseBCG.html#ComplexNumberParseFailure"><span class="hs-identifier hs-var">ComplexNumberParseFailure</span></a></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="annottext">String -&gt; IO CDouble
 forall a. HasCallStack =&gt; String -&gt; a
 </span><span class="hs-identifier hs-var">error</span></span><span> </span><span class="annot"><span class="annottext">(String -&gt; IO CDouble) -&gt; String -&gt; IO CDouble
 forall a b. (a -&gt; b) -&gt; a -&gt; b
 </span><span class="hs-operator hs-var">$</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; Int -&gt; String -&gt; String
-</span><a href="#local-6989586621679035305"><span class="hs-identifier hs-var">errMsg</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679035298"><span class="hs-identifier hs-var">errMsg</span></a></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;Failed to parse the complex number&quot;</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679035308"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679035315"><span class="hs-identifier hs-var">str</span></a></span><span>
-</span><span id="line-22"></span><span>  </span><span class="hs-keyword">where</span><span>
-</span><span id="line-23"></span><span>    </span><span id="local-6989586621679035305"><span class="annot"><span class="annottext">errMsg :: String -&gt; Int -&gt; String -&gt; String
-</span><a href="#local-6989586621679035305"><span class="hs-identifier hs-var hs-var">errMsg</span></a></span></span><span> </span><span id="local-6989586621679035303"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679035303"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span id="local-6989586621679035302"><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679035302"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679035301"><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679035301"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679035303"><span class="hs-identifier hs-var">m</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679035301"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679035308"><span class="hs-identifier hs-var">str</span></a></span><span>
+</span><span id="line-30"></span><span>  </span><span class="hs-keyword">where</span><span>
+</span><span id="line-31"></span><span>    </span><span id="local-6989586621679035298"><span class="annot"><span class="annottext">errMsg :: String -&gt; Int -&gt; String -&gt; String
+</span><a href="#local-6989586621679035298"><span class="hs-identifier hs-var hs-var">errMsg</span></a></span></span><span> </span><span id="local-6989586621679035296"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679035296"><span class="hs-identifier hs-var">m</span></a></span></span><span> </span><span id="local-6989586621679035295"><span class="annot"><span class="annottext">Int
+</span><a href="#local-6989586621679035295"><span class="hs-identifier hs-var">l</span></a></span></span><span> </span><span id="local-6989586621679035294"><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679035294"><span class="hs-identifier hs-var">c</span></a></span></span><span> </span><span class="hs-glyph">=</span><span> </span><span class="annot"><span class="annottext">String
+</span><a href="#local-6989586621679035296"><span class="hs-identifier hs-var">m</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. [a] -&gt; [a] -&gt; [a]
 </span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot; on line &quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
@@ -72,22 +80,22 @@ forall a. [a] -&gt; [a] -&gt; [a]
 </span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">Int -&gt; String
 forall a. Show a =&gt; a -&gt; String
 </span><span class="hs-identifier hs-var">show</span></span><span> </span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679035302"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
+</span><a href="#local-6989586621679035295"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. [a] -&gt; [a] -&gt; [a]
 </span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">String
 </span><span class="hs-string">&quot;\n\n&quot;</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; String -&gt; String
 forall a. [a] -&gt; [a] -&gt; [a]
 </span><span class="hs-operator hs-var">++</span></span><span> </span><span class="annot"><span class="annottext">String -&gt; [String]
 </span><span class="hs-identifier hs-var">lines</span></span><span> </span><span class="annot"><span class="annottext">String
-</span><a href="#local-6989586621679035301"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; Int -&gt; String
+</span><a href="#local-6989586621679035294"><span class="hs-identifier hs-var">c</span></a></span><span> </span><span class="annot"><span class="annottext">[String] -&gt; Int -&gt; String
 forall a. [a] -&gt; Int -&gt; a
 </span><span class="hs-operator hs-var">!!</span></span><span> </span><span class="hs-special">(</span><span class="annot"><span class="annottext">Int
-</span><a href="#local-6989586621679035302"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
+</span><a href="#local-6989586621679035295"><span class="hs-identifier hs-var">l</span></a></span><span> </span><span class="annot"><span class="annottext">Int -&gt; Int -&gt; Int
 forall a. Num a =&gt; a -&gt; a -&gt; a
 </span><span class="hs-glyph hs-var">-</span></span><span> </span><span class="annot"><span class="annottext">Int
 </span><span class="hs-number">1</span></span><span class="hs-special">)</span><span>
-</span><span id="line-24"></span><span>
-</span><span id="line-25"></span><span>
-</span><span id="line-26"></span><span class="hs-keyword">foreign</span><span> </span><span class="hs-keyword">export</span><span> </span><span class="annot"><span class="hs-keyword">ccall</span></span><span> </span><span class="annot"><a href="Clib.html#howMono"><span class="hs-identifier hs-type">howMono</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">CString</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CDouble</span></span><span>
-</span><span id="line-27"></span><span class="hs-comment">-- The exported function follows the C naming convention</span><span>
-</span><span id="line-28"></span><span class="hs-keyword">foreign</span><span> </span><span class="hs-keyword">export</span><span> </span><span class="annot"><span class="hs-keyword">ccall</span></span><span> </span><span class="annot"><span class="hs-string">&quot;how_mono&quot;</span></span><span> </span><span class="annot"><a href="Clib.html#howMono"><span class="hs-identifier hs-type">howMono</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">CString</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CDouble</span></span></pre></body></html>
+</span><span id="line-32"></span><span>
+</span><span id="line-33"></span><span>
+</span><span id="line-34"></span><span class="hs-keyword">foreign</span><span> </span><span class="hs-keyword">export</span><span> </span><span class="annot"><span class="hs-keyword">ccall</span></span><span> </span><span class="annot"><a href="Clib.html#howMono"><span class="hs-identifier hs-type">howMono</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">CString</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CDouble</span></span><span>
+</span><span id="line-35"></span><span class="hs-comment">-- The exported function follows the C naming convention</span><span>
+</span><span id="line-36"></span><span class="hs-keyword">foreign</span><span> </span><span class="hs-keyword">export</span><span> </span><span class="annot"><span class="hs-keyword">ccall</span></span><span> </span><span class="annot"><span class="hs-string">&quot;how_mono&quot;</span></span><span> </span><span class="annot"><a href="Clib.html#howMono"><span class="hs-identifier hs-type">howMono</span></a></span><span> </span><span class="hs-glyph">::</span><span> </span><span class="annot"><span class="hs-identifier hs-type">CString</span></span><span> </span><span class="hs-glyph">-&gt;</span><span> </span><span class="annot"><span class="hs-identifier hs-type">IO</span></span><span> </span><span class="annot"><span class="hs-identifier hs-type">CDouble</span></span></pre></body></html>
