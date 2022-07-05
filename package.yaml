@@ -50,7 +50,7 @@ tests:
     - hspec >= 2.0
 
 verbatim: |
-  foreign-library libhowmono
+  foreign-library howmonochromatic
     type:                native-shared
     if os(Windows)
       options: standalone
