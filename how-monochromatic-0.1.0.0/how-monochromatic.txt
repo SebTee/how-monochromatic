@@ -158,6 +158,10 @@ module Clib
 --   <a>parse</a>, and have the parsed <a>BCG</a>'s <a>dist</a> value
 --   returned.
 --   
+--   <ul>
+--   <li>1 is returned in the case of a parse error.</li>
+--   </ul>
+--   
 --   Can also be called as <tt>how_mono(g)</tt> to follow C function naming
 --   conventions.
 howMono :: CString -> IO CDouble
