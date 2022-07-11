@@ -18,18 +18,15 @@ import Foreign.C.Types
 -- | Input a C language string, following the convention defined for 'ParseBCG.parse', 
 -- and have the parsed 'BCG.BCG'\'s 'BCG.dist' value returned.
 -- 
+-- -1 is returned in the case of a parse error.
+-- 
 -- Can also be called as @how_mono(g)@ to follow C function naming conventions.
 howMono :: CString -> IO CDouble
 howMono cStr = do
   str <- peekCString cStr
   case parse str of
     Right g -> return $ CDouble $ dist g
-    Left (e, l) -> case e of
-      IncorrectNumberOfParameters -> error $ errMsg "Incorrect number of parameters" l str
-      ComplexNumberParseFailure -> error $ errMsg "Failed to parse the complex number" l str
-  where
-    errMsg m l c = m ++ " on line " ++ show l ++ "\n\n" ++ lines c !! (l - 1)
-
+    Left _ -> return $ CDouble (-1)
 
 foreign export ccall howMono :: CString -> IO CDouble
 -- The exported function follows the C naming convention
